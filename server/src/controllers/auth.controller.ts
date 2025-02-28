@@ -1,14 +1,10 @@
-import { Request, Response } from 'express';
+import type { Request, Response } from 'express';
 import { checkPassword, hashPassword } from '../utils/auth';
 import slug from 'slug';
 import User from '../models/User';
-import { validationResult } from 'express-validator';
+import { handleInputErrors } from '../middleware/validation';
 
 export const register = async (req: Request, res: Response): Promise<any> => {
-  let errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
   try {
     const { email, password } = req.body;
 
@@ -36,11 +32,6 @@ export const register = async (req: Request, res: Response): Promise<any> => {
 };
 
 export const login = async (req: Request, res: Response): Promise<any> => {
-  let errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
-
   const { email, password } = req.body;
   const user = await User.findOne({ email });
   if (!user) {
