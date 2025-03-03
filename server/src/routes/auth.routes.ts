@@ -1,7 +1,8 @@
 import { Router } from 'express';
 import { body } from 'express-validator';
-import { login, register } from '../controllers/auth.controller';
+import { getUser, login, register, updateProfile, uploadImage } from '../controllers/auth.controller';
 import { handleInputErrors } from '../middleware/validation';
+import { authenticate } from '../middleware/auth';
 
 const router = Router();
 
@@ -22,4 +23,16 @@ router.post(
   body('password').isLength({ min: 8 }).withMessage('The password is required'),
   login
 );
+
+router.get('/user', authenticate, getUser);
+
+router.patch(
+  '/user',
+  body('handle').notEmpty().withMessage('The handle cannot be sent empty'),
+  handleInputErrors,
+  authenticate,
+  updateProfile
+);
+
+router.post('/user/image', authenticate, uploadImage);
 export default router;

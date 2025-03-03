@@ -81,7 +81,7 @@ const RegisterView = () => {
           <input
             id="handle"
             type="text"
-            placeholder="Nombre de usuario: sin espacios"
+            placeholder="Nombre de usuario"
             className="bg-slate-100 border-none p-3 rounded-lg placeholder-slate-400"
             {...register('handle', {
               required: 'El handle es requerido',
@@ -91,12 +91,12 @@ const RegisterView = () => {
         </div>
         <div className="grid grid-cols-1 space-y-3">
           <label htmlFor="password" className="text-2xl text-slate-500">
-            Password
+            Contraseña
           </label>
           <input
             id="password"
             type="password"
-            placeholder="Password de Registro"
+            placeholder="Contraseña"
             className="bg-slate-100 border-none p-3 rounded-lg placeholder-slate-400"
             {...register('password', {
               required: 'El password es requerido',
@@ -111,12 +111,12 @@ const RegisterView = () => {
 
         <div className="grid grid-cols-1 space-y-3">
           <label htmlFor="password_confirmation" className="text-2xl text-slate-500">
-            Repetir Password
+            Repetir Contraseña
           </label>
           <input
             id="password_confirmation"
             type="password"
-            placeholder="Repetir Password"
+            placeholder="Repetir Contraseña"
             className="bg-slate-100 border-none p-3 rounded-lg placeholder-slate-400"
             {...register('password_confirmation', {
               required: 'Se requiere confirmación de contraseña',
