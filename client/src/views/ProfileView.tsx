@@ -51,7 +51,10 @@ export default function ProfileView() {
   };
 
   const handleUserUpdate = (formData: ProfileForm) => {
-    updateProfileMutation.mutate(formData);
+    const user: User = queryClient.getQueryData(['user'])!;
+    user.description = formData.description;
+    user.handle = formData.handle;
+    updateProfileMutation.mutate(user);
   };
   return (
     <form className="bg-white p-10 rounded-lg space-y-5" onSubmit={handleSubmit(handleUserUpdate)}>
